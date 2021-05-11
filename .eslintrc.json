@@ -37,6 +37,7 @@
         "tsx": "never"
       }
     ],
+    "import/no-extraneous-dependencies": "off",
     "no-use-before-define": "off",
     "camelcase": "off"
   },
