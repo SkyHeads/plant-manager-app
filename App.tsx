@@ -3,11 +3,13 @@ import React from 'react';
 
 import Welcome from './src/pages/Welcome';
 
-export default function App() {
+const App: React.FC = () => {
   return (
     <>
       <StatusBar style="auto" />
       <Welcome />
     </>
   );
-}
+};
+
+export default App;
