@@ -11,6 +11,8 @@ import {
   Keyboard,
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+
 import Button from '../components/Button';
 
 import colors from '../styles/colors';
@@ -20,6 +22,8 @@ const UserIdentification: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [name, setName] = useState<string>();
+
+  const navigation = useNavigation();
 
   function handleInputBlur() {
     setIsFocused(false);
@@ -33,6 +37,10 @@ const UserIdentification: React.FC = () => {
   function handleInputChangeText(value: string) {
     setIsFilled(!!value);
     setName(value);
+  }
+
+  function handleSubmit() {
+    navigation.navigate('Confirmation');
   }
 
   return (
@@ -64,7 +72,7 @@ const UserIdentification: React.FC = () => {
               />
 
               <View style={styles.footer}>
-                <Button title="Confirmar" />
+                <Button title="Confirmar" onPress={handleSubmit} />
               </View>
             </View>
           </View>

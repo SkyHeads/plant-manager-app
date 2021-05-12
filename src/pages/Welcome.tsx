@@ -8,12 +8,21 @@ import {
   Dimensions,
   SafeAreaView,
 } from 'react-native';
+
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import wateringImg from '../assets/watering.png';
 
 const Welcome: React.FC = () => {
+  const navigation = useNavigation();
+
+  function handleStartNav() {
+    navigation.navigate('UserIdentification');
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
@@ -30,7 +39,11 @@ const Welcome: React.FC = () => {
           sempre que precisar.
         </Text>
 
-        <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.button}
+          activeOpacity={0.7}
+          onPress={handleStartNav}
+        >
           <Feather name="chevron-right" style={styles.buttonIcon} />
         </TouchableOpacity>
       </View>
