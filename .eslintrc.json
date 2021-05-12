@@ -41,7 +41,8 @@
     ],
     "import/no-extraneous-dependencies": "off",
     "no-use-before-define": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "settings": {
     "import/resolver": {
