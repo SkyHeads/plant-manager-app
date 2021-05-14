@@ -29,7 +29,11 @@ interface PlantProps {
 const PlantSelect: React.FC = () => {
   const [enviroments, setEnviroments] = useState<EnviromentsProps[]>([]);
   const [plants, setPlants] = useState<PlantProps[]>([]);
+  const [enviromentSelected, setEnviromentSelected] = useState('all');
 
+  function handleEnviromentSelected(enviroment: string) {
+    setEnviromentSelected(enviroment);
+  }
   useEffect(() => {
     async function fetchEnviroment() {
       const { data } = await api.get(
@@ -68,7 +72,13 @@ const PlantSelect: React.FC = () => {
         <FlatList
           keyExtractor={item => String(item.key)}
           data={enviroments}
-          renderItem={({ item }) => <EnviromentButton title={item.title} />}
+          renderItem={({ item }) => (
+            <EnviromentButton
+              title={item.title}
+              active={item.key === enviromentSelected}
+              onPress={() => handleEnviromentSelected(item.key)}
+            />
+          )}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.enviromentList}
