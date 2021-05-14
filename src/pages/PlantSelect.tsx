@@ -29,10 +29,21 @@ interface PlantProps {
 const PlantSelect: React.FC = () => {
   const [enviroments, setEnviroments] = useState<EnviromentsProps[]>([]);
   const [plants, setPlants] = useState<PlantProps[]>([]);
+  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
   const [enviromentSelected, setEnviromentSelected] = useState('all');
 
   function handleEnviromentSelected(enviroment: string) {
     setEnviromentSelected(enviroment);
+
+    if (enviroment === 'all') {
+      return setFilteredPlants(plants);
+    }
+
+    const filtered = plants.filter(plant =>
+      plant.environments.includes(enviroment),
+    );
+
+    setFilteredPlants(filtered);
   }
   useEffect(() => {
     async function fetchEnviroment() {
@@ -55,6 +66,7 @@ const PlantSelect: React.FC = () => {
     async function fetchPlants() {
       const { data } = await api.get('plants?_sort=name&_order=asc');
       setPlants(data);
+      setFilteredPlants(data);
     }
 
     fetchPlants();
@@ -88,7 +100,7 @@ const PlantSelect: React.FC = () => {
       <View style={styles.plants}>
         <FlatList
           keyExtractor={item => String(item.id)}
-          data={plants}
+          data={filteredPlants}
           renderItem={({ item }) => <PlantCardPrimary data={item} />}
           numColumns={2}
           showsVerticalScrollIndicator={false}
