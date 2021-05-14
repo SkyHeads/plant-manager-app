@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 import EnviromentButton from '../components/EnviromentButton';
 import Header from '../components/Header';
+import PlantCardPrimary from '../components/PlantCardPrimary';
 import api from '../services/api';
 
 import colors from '../styles/colors';
@@ -13,12 +14,27 @@ interface EnviromentsProps {
   title: string;
 }
 
+interface PlantProps {
+  id: string;
+  name: string;
+  about: string;
+  water_tips: string;
+  photo: string;
+  environments: [string];
+  frequency: {
+    times: number;
+    repeat_every: string;
+  };
+}
 const PlantSelect: React.FC = () => {
   const [enviroments, setEnviroments] = useState<EnviromentsProps[]>([]);
+  const [plants, setPlants] = useState<PlantProps[]>([]);
 
   useEffect(() => {
     async function fetchEnviroment() {
-      const { data } = await api.get('plants_environments');
+      const { data } = await api.get(
+        'plants_environments?_sort=title&_order=asc',
+      );
       setEnviroments([
         {
           key: 'all',
@@ -29,6 +45,15 @@ const PlantSelect: React.FC = () => {
     }
 
     fetchEnviroment();
+  }, []);
+
+  useEffect(() => {
+    async function fetchPlants() {
+      const { data } = await api.get('plants?_sort=name&_order=asc');
+      setPlants(data);
+    }
+
+    fetchPlants();
   }, []);
 
   return (
@@ -47,6 +72,16 @@ const PlantSelect: React.FC = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.enviromentList}
+        />
+      </View>
+
+      <View style={styles.plants}>
+        <FlatList
+          keyExtractor={item => String(item.id)}
+          data={plants}
+          renderItem={({ item }) => <PlantCardPrimary data={item} />}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -81,6 +116,11 @@ const styles = StyleSheet.create({
     marginLeft: 28,
     marginVertical: 32,
     paddingRight: 32,
+  },
+  plants: {
+    flex: 1,
+    paddingHorizontal: 22,
+    justifyContent: 'center',
   },
 });
 
