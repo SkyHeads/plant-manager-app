@@ -7,6 +7,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+
 import EnviromentButton from '../components/EnviromentButton';
 import Header from '../components/Header';
 import PlantCardPrimary from '../components/PlantCardPrimary';
@@ -43,7 +45,7 @@ const PlantSelect: React.FC = () => {
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   function handleEnrivomentSelected(environment: string) {
     setEnviromentSelected(environment);
@@ -84,9 +86,9 @@ const PlantSelect: React.FC = () => {
     fetchPlants();
   }
 
-  // function handlePlantSelect(plant: PlantProps) {
-  //   navigation.navigate('PlantSave', { plant });
-  // }
+  function handlePlantSelect(plant: PlantProps) {
+    navigation.navigate('PlantSave', { plant });
+  }
 
   useEffect(() => {
     async function fetchEnviroment() {
@@ -144,7 +146,7 @@ const PlantSelect: React.FC = () => {
           renderItem={({ item }) => (
             <PlantCardPrimary
               data={item}
-              // onPress={() => handlePlantSelect(item)}
+              onPress={() => handlePlantSelect(item)}
             />
           )}
           showsVerticalScrollIndicator={false}
