@@ -20,20 +20,10 @@ import colors from '../styles/colors';
 
 import Button from '../components/Button';
 import fonts from '../styles/fonts';
+import { PlantProps, savePlants } from '../lib/storage';
 
 interface Params {
-  plant: {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: [string];
-    frequency: {
-      times: number;
-      repeat_every: string;
-    };
-  };
+  plant: PlantProps;
 }
 
 const PlantSave: React.FC = () => {
@@ -61,6 +51,17 @@ const PlantSave: React.FC = () => {
 
   function handleOpenDateTimePickerForAndroid() {
     setShowDatePicker(oldState => !oldState);
+  }
+
+  async function handleSave() {
+    try {
+      await savePlants({
+        ...plant,
+        dateTimeNotification: selectedDateTime,
+      });
+    } catch {
+      Alert.alert('Não foi possivel salvar');
+    }
   }
 
   return (
@@ -100,12 +101,7 @@ const PlantSave: React.FC = () => {
           </TouchableOpacity>
         )}
 
-        <Button
-          title="Cadastrar Planta"
-          onPress={() => {
-            console.log('deu');
-          }}
-        />
+        <Button title="Cadastrar Planta" onPress={handleSave} />
       </View>
     </View>
   );

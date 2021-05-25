@@ -17,24 +17,13 @@ import api from '../services/api';
 
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
+import { PlantProps } from '../lib/storage';
 
 interface EnviromentsProps {
   key: string;
   title: string;
 }
 
-interface PlantProps {
-  id: string;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  };
-}
 const PlantSelect: React.FC = () => {
   const [enviroments, setEnvirtoments] = useState<EnviromentsProps[]>([]);
   const [plants, setPlants] = useState<PlantProps[]>([]);
