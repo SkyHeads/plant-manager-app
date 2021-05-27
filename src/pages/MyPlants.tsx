@@ -11,6 +11,7 @@ import fonts from '../styles/fonts';
 
 import Header from '../components/Header';
 import PlantCardSecondary from '../components/PlantcardSecondary';
+import Load from '../components/Load';
 
 const MyPlants: React.FC = () => {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
@@ -36,7 +37,7 @@ const MyPlants: React.FC = () => {
 
     loadStorageData();
   }, []);
-
+  if (loading) return <Load />;
   return (
     <View style={styles.container}>
       <Header />
