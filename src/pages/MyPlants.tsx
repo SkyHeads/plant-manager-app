@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, Image, FlatList, Alert } from 'react-native';
+import { View, StyleSheet, Text, Image, FlatList } from 'react-native';
 import { formatDistance } from 'date-fns';
 
 import pt from 'date-fns/esm/locale/pt/index.js';
@@ -21,6 +21,7 @@ const MyPlants: React.FC = () => {
   useEffect(() => {
     async function loadStorageData() {
       const plantsStoraged = await loadPlants();
+
       const nextTime = formatDistance(
         new Date(plantsStoraged[0].dateTimeNotification).getTime(),
         new Date().getTime(),
