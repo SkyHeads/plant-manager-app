@@ -31,7 +31,7 @@ const PlantSave: React.FC = () => {
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios');
 
   const route = useRoute();
-
+  const navigation = useNavigation();
   const { plant } = route.params as Params;
 
   function handleChangeTime(event: Event, datetime: Date | undefined) {
@@ -58,6 +58,15 @@ const PlantSave: React.FC = () => {
       await savePlants({
         ...plant,
         dateTimeNotification: selectedDateTime,
+      });
+
+      navigation.navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle:
+          'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado.',
+        buttonTitle: 'Muito Obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants',
       });
     } catch {
       Alert.alert('Não foi possivel salvar');
