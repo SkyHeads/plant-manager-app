@@ -74,45 +74,50 @@ const PlantSave: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.PlantInfo}>
-        <SvgFromUri uri={plant.photo} width={150} height={150} />
-        <Text style={styles.plantName}>{plant.name}</Text>
-        <Text style={styles.plantAbout}>{plant.about}</Text>
-      </View>
-      <View style={styles.controller}>
-        <View style={styles.tipContainer}>
-          <Image source={waterDrop} style={styles.tipImage} />
-          <Text style={styles.tipText}>{plant.water_tips}</Text>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.container}
+    >
+      <View style={styles.container}>
+        <View style={styles.PlantInfo}>
+          <SvgFromUri uri={plant.photo} width={150} height={150} />
+          <Text style={styles.plantName}>{plant.name}</Text>
+          <Text style={styles.plantAbout}>{plant.about}</Text>
         </View>
-        <Text style={styles.alertLabel}>
-          Escola o melhor horário para ser lembrado:
-        </Text>
+        <View style={styles.controller}>
+          <View style={styles.tipContainer}>
+            <Image source={waterDrop} style={styles.tipImage} />
+            <Text style={styles.tipText}>{plant.water_tips}</Text>
+          </View>
+          <Text style={styles.alertLabel}>
+            Escola o melhor horário para ser lembrado:
+          </Text>
 
-        {showDatePicker && (
-          <DateTimePicker
-            value={selectedDateTime}
-            mode="time"
-            display="spinner"
-            onChange={handleChangeTime}
-          />
-        )}
+          {showDatePicker && (
+            <DateTimePicker
+              value={selectedDateTime}
+              mode="time"
+              display="spinner"
+              onChange={handleChangeTime}
+            />
+          )}
 
-        {Platform.OS === 'android' && (
-          <TouchableOpacity
-            style={styles.dateTimePickerButton}
-            onPress={handleOpenDateTimePickerForAndroid}
-          >
-            <Text style={styles.dateTimePickerText}>{`Mudar ${format(
-              selectedDateTime,
-              'HH:mm',
-            )}`}</Text>
-          </TouchableOpacity>
-        )}
+          {Platform.OS === 'android' && (
+            <TouchableOpacity
+              style={styles.dateTimePickerButton}
+              onPress={handleOpenDateTimePickerForAndroid}
+            >
+              <Text style={styles.dateTimePickerText}>{`Mudar ${format(
+                selectedDateTime,
+                'HH:mm',
+              )}`}</Text>
+            </TouchableOpacity>
+          )}
 
-        <Button title="Cadastrar Planta" onPress={handleSave} />
+          <Button title="Cadastrar Planta" onPress={handleSave} />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
