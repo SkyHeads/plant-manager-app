@@ -10,6 +10,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
 import Header from '../components/Header';
+import PlantCardSecondary from '../components/PlantcardSecondary';
 
 const MyPlants: React.FC = () => {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
@@ -48,9 +49,8 @@ const MyPlants: React.FC = () => {
         <FlatList
           data={myPlants}
           keyExtractor={item => String(item.id)}
-          renderItem={item => <Text>Elemento</Text>}
+          renderItem={({ item }) => <PlantCardSecondary data={item} />}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flex: 1 }}
         />
       </View>
     </View>
