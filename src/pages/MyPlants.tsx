@@ -51,7 +51,7 @@ const MyPlants: React.FC = () => {
       );
 
       setNextWatered(
-        `Não esqueça de regar a ${plantsStoraged[0].name} à ${nextTime}.`,
+        `Não esqueça de regar a ${plantsStoraged[0].name} em aproximadamente ${nextTime}.`,
       );
 
       setMyPlants(plantsStoraged);
