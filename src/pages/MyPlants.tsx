@@ -51,7 +51,7 @@ const MyPlants: React.FC = () => {
       );
 
       setNextWatered(
-        `Não esqueça de regar a ${plantsStoraged[0].name} em aproximadamente ${nextTime}.`,
+        `Não esqueça de regar a ${plantsStoraged[0].name} em ${nextTime}.`,
       );
 
       setMyPlants(plantsStoraged);
@@ -123,6 +123,18 @@ const styles = StyleSheet.create({
     color: colors.heading,
     marginVertical: 20,
   },
+  // loadContainer: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   paddingTop: 150,
+  // },
+  // loadTitle: {
+  //   textAlign: 'center',
+  //   fontSize: 32,
+  //   color: colors.heading,
+  //   fontFamily: fonts.heading,
+  // },
 });
 
 export default MyPlants;

@@ -112,4 +112,5 @@ export async function removePlant(id: string): Promise<void> {
   delete plants[id];
 
   await AsyncStorage.setItem('@plantmanager:plants', JSON.stringify(plants));
+  // await AsyncStorage.removeItem('@plantmanager:plants');
 }
